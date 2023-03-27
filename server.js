@@ -55,9 +55,11 @@ app.post("/arts", (req, res) => {
   const { artName, artistName, description, imageUrl } = body;
   if (!imageUrl) {
     res.status(400).send("이미지 업로드가 필요합니다.");
+    return;
   }
   if (!artName || !artistName || !description) {
     res.status(400).send("모든 필드를 입력해주세요");
+    return;
   }
   models.Art.create({
     artName,

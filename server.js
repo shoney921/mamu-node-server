@@ -51,8 +51,12 @@ app.get("/arts", (req, res) => {
 
 app.post("/arts", (req, res) => {
   const body = req.body;
+
   const { artName, artistName, description, imageUrl } = body;
-  if (!artName || !artistName || !description || !imageUrl) {
+  if (!imageUrl) {
+    res.status(400).send("이미지 업로드가 필요합니다.");
+  }
+  if (!artName || !artistName || !description) {
     res.status(400).send("모든 필드를 입력해주세요");
   }
   models.Art.create({
